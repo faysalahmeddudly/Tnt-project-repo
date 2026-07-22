@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #E65F00
+  --color-primary-hover: #E65F00
+  --color-primary-active: #C94F00
+  --color-secondary: #00C950
+  --color-secondary-hover: #00c950
+  
+}
