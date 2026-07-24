@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 type TextareaVariant = "default" | "destructive" | "ghost";
 type TextareaSize = "sm" | "default" | "lg";
@@ -26,9 +27,7 @@ const sizeStyles: Record<TextareaSize, string> = {
   lg: "min-h-[120px] px-4 py-3 text-base",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (

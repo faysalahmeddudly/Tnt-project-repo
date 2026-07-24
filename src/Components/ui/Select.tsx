@@ -1,5 +1,6 @@
 import React from "react";
 import { ChevronDown } from "lucide-react";
+import { cn } from "../../utils/cn";
 
 type SelectVariant = "default" | "destructive" | "ghost";
 type SelectSize = "sm" | "default" | "lg";
@@ -38,9 +39,7 @@ const sizeStyles: Record<SelectSize, string> = {
   lg: "h-11 pl-4 text-base",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
   (

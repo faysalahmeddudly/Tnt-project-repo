@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 type StatusDotVariant = "online" | "offline" | "away" | "busy" | "default";
 type StatusDotSize = "sm" | "default" | "lg";
@@ -34,9 +35,7 @@ const labelSizeStyles: Record<StatusDotSize, string> = {
   lg: "text-base",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export const StatusDot = ({
   className,

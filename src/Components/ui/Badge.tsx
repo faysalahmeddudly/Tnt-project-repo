@@ -1,5 +1,6 @@
 import React from "react";
 import { X } from "lucide-react";
+import { cn } from "../../utils/cn";
 
 type BadgeVariant =
   | "default"
@@ -32,9 +33,6 @@ const sizeStyles: Record<BadgeSize, string> = {
   lg: "h-7 px-3 text-sm",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
 
 export const Badge = ({
   className,

@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 type ButtonVariant =
   | "default"
@@ -36,9 +37,7 @@ const sizeStyles: Record<ButtonSize, string> = {
   icon: "h-9 w-9 p-0",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 //*button 
 

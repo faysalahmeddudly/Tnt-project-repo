@@ -1,10 +1,13 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 type ToggleVariant = "default" | "destructive" | "success";
 type ToggleSize = "sm" | "default" | "lg";
 
-interface ToggleProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+interface ToggleProps extends Omit<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  "size" | "type"
+> {
   variant?: ToggleVariant;
   size?: ToggleSize;
   label?: string;
@@ -23,20 +26,28 @@ const variantStyles: Record<ToggleVariant, string> = {
   success: "bg-gray-300 peer-checked:bg-green-600",
 };
 
-const sizeStyles: Record<ToggleSize, { track: string; thumb: string; translate: string }> = {
+const sizeStyles: Record<
+  ToggleSize,
+  { track: string; thumb: string; translate: string }
+> = {
   sm: { track: "h-4 w-7", thumb: "h-3 w-3", translate: "translate-x-3" },
   default: { track: "h-5 w-9", thumb: "h-4 w-4", translate: "translate-x-4" },
   lg: { track: "h-6 w-11", thumb: "h-5 w-5", translate: "translate-x-5" },
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
   (
-    { className, variant = "default", size = "default", label, description, id, checked, ...props },
-    ref
+    {
+      className,
+      variant = "default",
+      size = "default",
+      label,
+      description,
+      id,
+      checked,
+      ...props
+    },
+    ref,
   ) => {
     const generatedId = React.useId();
     const toggleId = id ?? generatedId;
@@ -55,7 +66,12 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
           />
           <label
             htmlFor={toggleId}
-            className={cn(trackBaseStyles, track, variantStyles[variant], className)}
+            className={cn(
+              trackBaseStyles,
+              track,
+              variantStyles[variant],
+              className,
+            )}
           >
             <span
               className={cn(
@@ -63,7 +79,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
                 thumb,
                 "translate-x-0.5 peer-checked:" + translate,
                 checked && translate,
-                "mt-0.5"
+                "mt-0.5",
               )}
             />
           </label>
@@ -72,7 +88,10 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         {(label || description) && (
           <div className="flex flex-col">
             {label && (
-              <label htmlFor={toggleId} className="text-sm font-medium text-gray-900 cursor-pointer">
+              <label
+                htmlFor={toggleId}
+                className="text-sm font-medium text-gray-900 cursor-pointer"
+              >
                 {label}
               </label>
             )}
@@ -83,7 +102,7 @@ export const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 Toggle.displayName = "Toggle";

@@ -1,4 +1,5 @@
 import React from "react";
+import { cn } from "../../utils/cn";
 
 type InputVariant = "default" | "destructive" | "ghost";
 type InputSize = "sm" | "default" | "lg";
@@ -29,9 +30,7 @@ const sizeStyles: Record<InputSize, string> = {
   lg: "h-11 px-4 text-base",
 };
 
-function cn(...classes: (string | undefined | false | null)[]) {
-  return classes.filter(Boolean).join(" ");
-}
+
 
 export const Input = ({
   className,
