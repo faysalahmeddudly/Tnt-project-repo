@@ -11,8 +11,8 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
   variant?: PaginationVariant;
   size?: PaginationSize;
-  siblingCount?: number; // current page er dui pashe koyta number dekhabe
-  showEdges?: boolean; // shuru/shesh page always dekhabe kina
+  siblingCount?: number; 
+  showEdges?: boolean;
   totalItems?: number;
   itemsPerPage?: number;
   className?: string;
@@ -24,13 +24,13 @@ const sizeStyles: Record<PaginationSize, string> = {
   lg: "h-10 w-10 text-base",
 };
 
-// currentPage er charpashe kon kon number dekhabe seta calculate kora hocche
+
 function getPageNumbers(
   currentPage: number,
   totalPages: number,
   siblingCount: number,
 ): (number | "ellipsis")[] {
-  const totalNumbers = siblingCount * 2 + 5; // first + last + current + 2 ellipsis + siblings
+  const totalNumbers = siblingCount * 2 + 5; 
 
   if (totalPages <= totalNumbers) {
     return Array.from({ length: totalPages }, (_, i) => i + 1);
