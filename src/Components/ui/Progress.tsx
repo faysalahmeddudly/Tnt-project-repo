@@ -5,17 +5,26 @@ type ProgressVariant = "default" | "success" | "warning" | "destructive";
 type ProgressSize = "sm" | "default" | "lg";
 
 interface ProgressProps extends React.HTMLAttributes<HTMLDivElement> {
-  value: number; // 0 - 100
+  value: number; 
   max?: number;
   variant?: ProgressVariant;
   size?: ProgressSize;
   showLabel?: boolean;
   label?: string;
   indeterminate?: boolean;
+
+
+  rounded?: boolean;
+
+
+  trackClassName?: string;
+
+
+  indicatorClassName?: string;
 }
 
 const trackSizeStyles: Record<ProgressSize, string> = {
-  sm: "h-1.5",
+  sm: "h-1",
   default: "h-2.5",
   lg: "h-4",
 };
@@ -36,14 +45,16 @@ export const Progress = ({
   showLabel = false,
   label,
   indeterminate = false,
+  rounded = true,
+  trackClassName,
+  indicatorClassName,
   ...props
 }: ProgressProps) => {
-  // value ke 0 theke max er moddhe clamp kora hocche (safety)
   const clampedValue = Math.min(Math.max(value, 0), max);
   const percentage = (clampedValue / max) * 100;
 
   return (
-    <div className="flex flex-col gap-1.5 w-full">
+    <div className={cn("flex w-full flex-col gap-1.5", className)}>
       {(showLabel || label) && (
         <div className="flex items-center justify-between text-sm text-gray-700">
           <span>{label}</span>
@@ -57,18 +68,21 @@ export const Progress = ({
         aria-valuemin={0}
         aria-valuemax={max}
         className={cn(
-          "w-full overflow-hidden rounded-full bg-gray-200",
+          "relative w-full overflow-hidden bg-gray-200",
           trackSizeStyles[size],
-          className,
+          rounded && "rounded-full",
+          trackClassName,
         )}
         {...props}
       >
         <div
           className={cn(
-            "h-full rounded-full transition-all duration-300 ease-out",
+            "h-full transition-[width] duration-300 ease-out",
+            rounded && "rounded-full",
             variantStyles[variant],
             indeterminate &&
-              "w-1/3 animate-[progress-indeterminate_1.2s_ease-in-out_infinite]",
+              "absolute left-0 top-0 w-1/3 animate-[progress-indeterminate_1.2s_ease-in-out_infinite]",
+            indicatorClassName,
           )}
           style={indeterminate ? undefined : { width: `${percentage}%` }}
         />
